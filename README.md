@@ -2,25 +2,92 @@
 
 Une collaboration Data For Good et The Conversation.
 
-## Start guidelines
+## Guide de démarrage
 
-- Install Python [add link]
-- Install uv [add link]
-- Install git [add link]
-- Navigate to folder where you want to clone the project (cd folder)
-- Clone project - code: git clone url
-[Ajouter screenshot github pour trouver l'url du projet]
-- If using VS code, load the folder project
-- Run uv sync to synchronise the environment
-- Create branch on github, associated to an issue
-- Load branch (add code to test which git status or check version control pane)
-- Write new code
-- run uv ruff format something something before pushing the code as it will result in a fail in the merge if the formatting does not follow the ruff formatting
-- Stage the changes: git add . for all files/git add random_script.py to stage a specific file
-- git commit to commit the changes
-- git push -m "Mandatory message describing the changes"
-- Alternatively use the Source Control pane in VS Code to add, commit and push changes if you're using VS Code
+Ce guide explique comment récupérer le projet en local et contribuer au code.
 
+### Installer les outils
+
+Installer les outils suivants:
+- Git: https://git-scm.com/downloads
+- VS Code (recommandé mais pas obligatoire): https://code.visualstudio.com/
+- Pour les prérequis, voir la section installation ci-dessous (python, uv)
+
+### Installer le projet en local
+- Ouvrir un terminal (e.g. PowerShell, terminal VS Code)
+- Se déplacer vers le dossier où cloner le projet:
+
+```bash
+cd path/to/folder
+```
+
+- Dans GitHub, ouvrir la page du projet, cliquer sur le bouton code et copier l'URL HTTPS
+- Cloner le projet:
+
+```bash
+git clone URL_PROJET
+```
+
+### Créer et récupérer une branche Git
+
+- Dans GitHub, créer une nouvelle branche dans l'issue sur laquelle vous travaillez.
+- Dans le terminal, récupérer les branches:
+
+```bash
+git fetch origin
+```
+
+- Basculer sur la nouvelle branche:
+
+```bash
+git switch nom-branche
+```
+
+- Pour vérifier la branche active
+
+```bash
+git branch --show-current
+```
+
+### Modifier le code et enregister les modifications
+
+- Faire les changement nécessaires
+- Avant de faire le commit, exécuter la commande suivante pour appliquer les règles de formatage du projet:
+
+```bash
+uv run ruff format
+```
+
+- Pour ajouter les nouveaux fichiers:
+
+```bash
+git add nom_fichier.py
+```
+
+- Créer un commit avec une description des changements claire:
+
+```bash
+git commit -m "Description des modifications"
+```
+
+- Envoyer les modifications sur GitHub:
+
+```bash
+git push
+```
+
+Si vous utilisez VS Code, les opérations Git peuvent être réalisées depuis l'onglet Source Control:
+- Vérifier la branche active
+- Ajouter les fichiers modifiés au stage en cliquant sur +
+- Renseigner un message décrivant les modifications
+- Cliquer sur Commit
+- Cliquer sur Push ou Sync Changes pour envoyer les modifications sur GitHub
+
+### Créer une pull request
+
+- Dans GitHub, créer une pull request depuis la branche créée
+- Vérifier que l'issue associée est bien référencée
+- Vérifier que les check automatiques sont passés avant de demander un merge
 
 ## Prérequis
 
