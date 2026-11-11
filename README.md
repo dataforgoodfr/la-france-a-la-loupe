@@ -2,6 +2,26 @@
 
 Une collaboration Data For Good et The Conversation.
 
+## Start guidelines
+
+- Install Python [add link]
+- Install uv [add link]
+- Install git [add link]
+- Navigate to folder where you want to clone the project (cd folder)
+- Clone project - code: git clone url
+[Ajouter screenshot github pour trouver l'url du projet]
+- If using VS code, load the folder project
+- Run uv sync to synchronise the environment
+- Create branch on github, associated to an issue
+- Load branch (add code to test which git status or check version control pane)
+- Write new code
+- run uv ruff format something something before pushing the code as it will result in a fail in the merge if the formatting does not follow the ruff formatting
+- Stage the changes: git add . for all files/git add random_script.py to stage a specific file
+- git commit to commit the changes
+- git push -m "Mandatory message describing the changes"
+- Alternatively use the Source Control pane in VS Code to add, commit and push changes if you're using VS Code
+
+
 ## Prérequis
 
 - python >= 3.12
