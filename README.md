@@ -58,10 +58,16 @@ git branch --show-current
 uv run ruff format
 ```
 
-- Pour ajouter les nouveaux fichiers:
+- Pour ajouter les fichiers modifiés:
 
 ```bash
 git add nom_fichier.py
+```
+
+ou pour tous les fichiers:
+
+```bash
+git add .
 ```
 
 - Créer un commit avec une description des changements claire:
