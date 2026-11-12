@@ -33,6 +33,13 @@ clean profile="dev":
 parquet_to_pmtiles fichier:
     gpio pmtiles create "{{fichier}}" "webapp/public/data/{{file_stem(fichier)}}.pmtiles" --max-zoom 9 --force
 
-# launch webapp
-webapp:
-    cd webapp && npm run dev
+# launch webapp (pmtiles lus dans webapp/public/data, ou ailleurs : just webapp http://lfe4.web.lfe4.localhost:3902/pmtiles)
+webapp pmtiles_url="":
+    cd webapp && {{ if pmtiles_url == "" { "" } else { "NEXT_PUBLIC_PMTILES_URL=" + pmtiles_url } }} npm run dev
+
+# Expose le bucket Garage local en lecture anonyme (port 3902) avec le CORS requis par pmtiles
+garage_web:
+    docker exec garage /garage bucket website --allow lfe4
+    AWS_ACCESS_KEY_ID=garagekeyid AWS_SECRET_ACCESS_KEY=garagesecretchangethis AWS_DEFAULT_REGION=lfe4 \
+        aws s3api put-bucket-cors --bucket lfe4 --endpoint-url http://localhost:3900 --cors-configuration \
+        '{"CORSRules":[{"AllowedOrigins":["*"],"AllowedMethods":["GET","HEAD"],"AllowedHeaders":["range","if-match"],"ExposeHeaders":["etag","content-range","content-length"],"MaxAgeSeconds":3600}]}'
