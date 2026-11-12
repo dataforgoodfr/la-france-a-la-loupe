@@ -39,7 +39,6 @@ def pmtiles_models(manifest):
     for node in manifest["nodes"].values():
         if node["resource_type"] != "model" or "marts" not in node["fqn"]:
             continue
-        # dbt >= 1.10 range le meta dans config, les versions precedentes a la racine
         meta = {**node.get("meta", {}), **node["config"].get("meta", {})}
         if meta.get("export") == "pmtiles":
             yield node, meta

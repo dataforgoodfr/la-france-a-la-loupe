@@ -9,6 +9,12 @@ import "maplibre-gl/dist/maplibre-gl.css";
 setWorkerUrl(new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url).toString());
 addProtocol("pmtiles", new Protocol().tile);
 
+// Racine des pmtiles, figee au build (export statique) :
+// - non definie : webapp/public/data (just parquet_to_pmtiles)
+// - dev_s3 : bucket Garage local servi en web (just garage_web)
+// - pre-prod : bucket Cellar public, defini dans l'env de l'app Clever Cloud
+const PMTILES_URL = (process.env.NEXT_PUBLIC_PMTILES_URL ?? "/data").replace(/\/$/, "");
+
 const nombre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 
 type Survol = { x: number; y: number; nom: string; valeur: number | null };
@@ -48,7 +54,7 @@ export default function MapBase() {
         onClick={suivre}
         onMouseLeave={() => setSurvol(null)}
       >
-        <Source id="communes" type="vector" url="pmtiles:///data/ips_lycees_par_commune.pmtiles">
+        <Source id="communes" type="vector" url={`pmtiles://${PMTILES_URL}/ips_lycees_par_commune.pmtiles`}>
           <Layer
             id="communes-aplat"
             type="fill"

@@ -1,0 +1,34 @@
+name: deploy webapp
+
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-pre-prod:
+    runs-on: ubuntu-24.04
+    environment: pre-prod
+    timeout-minutes: 20
+    concurrency:
+      group: webapp-pre-prod
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # clever deploy does a git push and needs the full history
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Deploy to Clever Cloud
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+          CLEVER_APP_ID: ${{ vars.CLEVER_WEBAPP_APP_ID }}
+        run: |
+          npx --yes clever-tools@5.4.0 link "$CLEVER_APP_ID"
+          npx --yes clever-tools@5.4.0 deploy --force --same-commit-policy rebuild
