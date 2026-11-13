@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 
+type Props = { title: string; slug: string };
+
 export default function PageTemplate({ title, slug }: Props) {
   return (
     <main>
