@@ -1,0 +1,12 @@
+---
+import MapBase from "../../components/MapBase";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="flex flex-col min-h-screen w-screen h-screen">
+    <main class="flex-1 w-full h-full">
+      <MapBase client:only="react" />
+    </main>
+  </div>
+</Layout>
