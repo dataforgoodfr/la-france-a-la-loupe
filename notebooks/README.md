@@ -27,3 +27,10 @@ Autrement vous pouvez ouvrir Marimo et utiliser son explorateur :
 ```bash
 uv run marimo edit
 ```
+
+## Notebook de démonstration
+
+Dans ce notebook, vous trouverez un exemple d'analyse très basique à partir d'un jeu de données.
+```bash
+uv run marimo edit notebooks/education/reussite_bac_origine_sociale.py
+```

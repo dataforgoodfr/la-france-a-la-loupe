@@ -1,0 +1,123 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.25.2",
+    "script_metadata_hash": null
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "e00cf802f52ebd6e2accda956723a169",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='Hbol-0' random-id='bdce0656-027c-a6eb-d077-8b1f7be81716'><marimo-anywidget data-initial-value='{&quot;model_id&quot;:&quot;f2dcb59231ba4168a8bff74c53bb1d84&quot;}' data-label='null' data-model-id='&quot;f2dcb59231ba4168a8bff74c53bb1d84&quot;'></marimo-anywidget></marimo-ui-element></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "zvam",
+      "code_hash": "946ae4e925952274578844bcc04c8779",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"presentation-du-notebook\">Pr\u00e9sentation du notebook</h1>\n<span class=\"paragraph\">Analyse du jeu de donn\u00e9es \"R\u00e9ussite au baccalaur\u00e9at selon l\u2019origine sociale\" disponible sur <a href=\"https://data.education.gouv.fr/explore/assets/fr-en-reussite-au-baccalaureat-origine-sociale/\" rel=\"noopener noreferrer\" target=\"_blank\">https://data.education.gouv.fr/explore/assets/fr-en-reussite-au-baccalaureat-origine-sociale/</a></span>\n<span class=\"paragraph\">Conclusion rapide : il nous manque des donn\u00e9es de l'INSEE sur la part de chaque cat\u00e9gorie socio-professionnelle dans la population fran\u00e7aise pour faire une analyse pertinente</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bAdi",
+      "code_hash": "4d7693e6c123e7bd305198572b077a90",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"recuperation-des-donnees-depuis-lapi\">R\u00e9cup\u00e9ration des donn\u00e9es depuis l'API</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "53c368cc22f31fa97231a44dc6594391",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "oyvB",
+      "code_hash": "6267fcf18b4882ef42c3ceea3e84609e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"visualisation-interactive-des-donnees\">Visualisation interactive des donn\u00e9es</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "ba813501bc34b2022e659ccbf7d606f7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "CQST",
+      "code_hash": "c0bf7655af5bba3accc0ff30e56aab2a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"graphique-exploratoire\">Graphique exploratoire</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "513c75c5f86bc28ee44b44598f77fcc8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "69b4a5d8d2bdfe307818072d2e7f4fa8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "dCgg",
+      "code_hash": "0e1290553b2f16b3155b330e1a13588e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"analyse-de-test-sur-le-cas-des-agriculteurs\">Analyse de test sur le cas des agriculteurs</h1></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "65f9fe3d52cadd9d91319a1f3b1c2c81",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "208376c7314671f942b20d69fbd1def9",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}
