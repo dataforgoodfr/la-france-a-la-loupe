@@ -5,84 +5,166 @@ Une collaboration Data For Good et The Conversation.
 ## Guide de démarrage
 
 Ce guide explique comment récupérer le projet en local et contribuer au code.
+Note : vous aurez besoin d'utiliser le terminal.
 
-### Installer les outils
+## Prérequis
 
-Installer les outils suivants:
-- Git: https://git-scm.com/downloads
-- VS Code (recommandé mais pas obligatoire): https://code.visualstudio.com/
-- Pour les prérequis, voir la section installation ci-dessous (python, uv)
+Vous aurez besoin des outils suivants :
+
+- Git : https://git-scm.com/install/
+- VS Code (ou un autre éditeur de code) : https://code.visualstudio.com/
+- python >= 3.12
+- uv
+- geoparquet-io
+- just
+- pre-commit
+- tox
+
+## Installation des prérequis
+
+- Télécharger et installer Python :
+
+[Installation de Python](https://www.python.org/downloads/)
+
+- Ce projet utilise [uv](https://docs.astral.sh/uv/) pour la gestion des dépendances Python :
+
+[Installation de uv](https://docs.astral.sh/uv/getting-started/installation/)
+
+- Si vous venez d'installer `uv`, mettre à jour la variable `PATH` dans un terminal :
+
+```bash
+uv tool update-shell
+```
+
+Puis fermer et redémarrer votre terminal.
+
+- Pour installer geoparquet-io, just, pre-commit et tox :
+
+```bash
+uv tool install geoparquet-io
+uv tool install just
+uv tool install pre-commit
+uv tool install tox
+```
 
 ### Installer le projet en local
-- Ouvrir un terminal (e.g. PowerShell, terminal VS Code)
-- Se déplacer vers le dossier où cloner le projet:
+
+Attention : la commande `git clone` crée un sous-dossier qui contiendra le projet.
+Le code n'est donc pas copié dans le dossier courant mais dans le sous-dossier.
+
+- Ouvrir un terminal (e.g. PowerShell, terminal VS Code).
+
+- Se déplacer vers le dossier de votre choix où cloner le projet:
 
 ```bash
 cd path/to/folder
 ```
 
-- Dans GitHub, ouvrir la page du projet, cliquer sur le bouton code et copier l'URL HTTPS
-- Cloner le projet:
+- Dans GitHub, ouvrir la page du projet, cliquer sur le bouton code et copier l'URL HTTPS.
+
+- Dans le terminal, cloner le projet:
 
 ```bash
-git clone URL_PROJET
+git clone https://github.com/dataforgoodfr/la-france-a-la-loupe.git
 ```
 
-### Créer et récupérer une branche Git
-
-- Dans GitHub, créer une nouvelle branche dans l'issue sur laquelle vous travaillez.
-- Dans le terminal, récupérer les branches:
+- Rentrer dans le dossier du projet :
 
 ```bash
-git fetch origin
+cd la-france-a-la-loupe
 ```
 
-- Basculer sur la nouvelle branche:
+- Installer les scripts pre-commit :
 
 ```bash
-git switch nom-branche
+pre-commit install
 ```
 
-- Pour vérifier la branche active
+- La commande suivante installe la version de Python adéquate, crée un environnement virtuel et installe les dépendances du projet.
 
 ```bash
-git branch --show-current
+uv sync
 ```
 
-### Modifier le code et enregister les modifications
+- A l'usage, si vous utilisez VS Code, l'environnement virtuel sera automatiquement activé lorsque vous ouvrirez le projet.
+Sinon, il suffit de l'activer manuellement avec la commande suivante :
 
-- Faire les changement nécessaires
-- Avant de faire le commit, exécuter la commande suivante pour appliquer les règles de formatage du projet:
+```bash
+source .venv/bin/activate
+```
+
+Ou alors, utiliser la commande `uv run ...` (au lieu de `python ...`) pour lancer un script Python.
+Par exemple :
+
+```bash
+uv run pipelines/run.py run build_database
+```
+
+### Créer une nouvelle branche Git
+
+- Ouvrir un terminal et mettre à jour la branche main :
+
+```bash
+git checkout main
+git pull
+```
+
+- Créer un nouvelle branche pour traiter votre issue :
+
+```bash
+git branch ma-branche
+git checkout ma-branche
+```
+
+Note : choisir un nom de branche en rapport avec votre issue, à la place de `ma-branche`.
+
+### Modifier le code et enregister les modifications (git commit)
+
+- Faire les changement nécessaires.
+
+- Avant de faire le commit, exécuter la commande suivante pour appliquer les règles de formatage du projet :
 
 ```bash
 uv run ruff format
 ```
 
-- Pour ajouter les fichiers modifiés:
+- S'il y a eu des erreurs, lister les fichiers corrigés :
+
+```bash
+git status
+```
+
+- Ajouter les fichiers modifiés :
 
 ```bash
 git add nom_fichier.py
 ```
 
-ou pour tous les fichiers:
+Ou ajouter tous les fichiers :
 
 ```bash
 git add .
 ```
 
-- Créer un commit avec une description des changements claire:
+- Créer un commit avec une description des changements claire :
 
 ```bash
-git commit -m "Description des modifications"
+git commit -m "Issue #123 : Description des modifications"
 ```
+
+Attention : lors du premier commit de cette branche, penser à noter le numéro de l'issue dans la description.
 
 - Envoyer les modifications sur GitHub:
 
 ```bash
-git push
+git push -u origin ma-branche
 ```
 
+Note : utiliser le vrai nom de votre branche, à la place de `ma-branche`.
+Note : la partie `-u origin ma-branche` n'est nécessaire que lors du premier push de la branche.
+
 Si vous utilisez VS Code, les opérations Git peuvent être réalisées depuis l'onglet Source Control:
+
 - Vérifier la branche active
 - Ajouter les fichiers modifiés au stage en cliquant sur +
 - Renseigner un message décrivant les modifications
@@ -91,62 +173,60 @@ Si vous utilisez VS Code, les opérations Git peuvent être réalisées depuis l
 
 ### Créer une pull request
 
-- Dans GitHub, créer une pull request depuis la branche créée
+- Dans GitHub, créer une pull request à partir de votre branche
 - Vérifier que l'issue associée est bien référencée
-- Vérifier que les check automatiques sont passés avant de demander un merge
+- Vérifier que les checks automatiques sont passés et qu'une review valide votre code avant de faire un merge
 
-## Prérequis
+### Résoudre des conflits
 
-- python >= 3.12
-- uv
-- just
-- pre-commit
-- tox
+Parfois il y a des conflits dûs à des changements dans la branche main.
 
-## Installation
-
-- [Installation de Python](#installation-de-python)
-
-Ce projet utilise [uv](https://docs.astral.sh/uv/) pour la gestion des dépendances Python. Il est préréquis pour l'installation de ce projet.
-
-Si vous venez d'installer `uv`, mettez à jour la variable `PATH` :
+- Ouvrir un terminal et mettre à jour la branche main :
 
 ```bash
-uv tool update-shell
+git checkout main
+git pull
 ```
 
-Puis fermez et redémarrez votre terminal.
-
-Pour installer just, pre-commit et tox :
+- Mettre à jour votre branche avec les changements de la branche main :
 
 ```bash
-uv tool install just
-uv tool install pre-commit
-uv tool install tox
+git checkout ma-branche
+git merge main
 ```
 
-Installation des scripts pre-commit :
+Note : utiliser le vrai nom de votre branche, à la place de `ma-branche`.
 
-```
-pre-commit install
-```
-
-Une fois installé, il suffit de lancer la commande suivante pour installer la version de Python adéquate, créer un environnement virtuel et installer les dépendances du projet.
+- Pour voir les fichiers qui contiennent des conflits :
 
 ```bash
-uv sync
+git status
 ```
 
-A l'usage, si vous utilisez VSCode, l'environnement virtuel sera automatiquement activé lorsque vous ouvrirez le projet. Sinon, il suffit de l'activer manuellement avec la commande suivante :
+- Ouvrir les fichiers concernés et faire les changement nécessaires.
+
+- Ajouter les fichiers modifiés :
 
 ```bash
-source .venv/bin/activate
+git add nom_fichier.py
 ```
 
-Ou alors, utilisez la commande `uv run ...` (au lieu de `python ...`) pour lancer un script Python. Par exemple :
+- Créer un commit (pas besoin de description) :
 
 ```bash
-uv run pipelines/run.py run build_database
+git commit
+```
+
+- Vérifier qu'il n'y a plus de conflits :
+
+```bash
+git status
+```
+
+- Envoyer les modifications sur GitHub:
+
+```bash
+git push
 ```
 
 ## Lancer les precommit-hook localement
@@ -183,7 +263,7 @@ docker-compose up -d
 
 Vérifier l'état du serveur
 
-```
+```bash
 docker exec garage /garage status
 ```
 
