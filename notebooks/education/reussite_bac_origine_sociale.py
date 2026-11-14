@@ -71,8 +71,14 @@ def _(pl, requests):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Visualisation interactive des données
+    # Statistiques et visualisation interactive des données
     """)
+
+
+@app.cell
+def _(df):
+    # Description statistique du jeu de données avec la méthode describe() de Polars
+    df.describe()
 
 
 @app.cell
