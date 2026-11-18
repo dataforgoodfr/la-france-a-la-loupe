@@ -39,6 +39,7 @@ dev = [
     "sqlfluff>=4.4.0",
     "sqlfluff-templater-dbt>=4.4.0",
     "rust-just",
+    "marimo[recommended]>=0.25.2",
 ]
 
 [tool.hatch.build.targets.wheel]
