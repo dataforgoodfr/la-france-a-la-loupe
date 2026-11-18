@@ -1,6 +1,6 @@
 // @ts-check
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import react from "@astrojs/react";
 
@@ -11,4 +11,21 @@ export default defineConfig({
   },
 
   integrations: [react()],
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Anton",
+      cssVariable: "--font-anton",
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Montserrat",
+      cssVariable: "--font-montserrat",
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Libre Baskerville",
+      cssVariable: "--font-libre-baskerville",
+    }
+  ]
 });
