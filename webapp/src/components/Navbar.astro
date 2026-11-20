@@ -1,0 +1,26 @@
+---
+const links = [
+  { href: "/", text: "Accueil" },
+  { href: "/immigration", text: "Immigration" },
+  { href: "/education", text: "Éducation" },
+  { href: "/sante", text: "Santé" },
+  { href: "/agriculture", text: "Agriculture" },
+  { href: "/securite", text: "Sécurité" },
+  { href: "/mentions-legales", text: "Mentions légales" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+const isActive = (href: string) =>
+  href === "/" ? pathname === href : pathname.startsWith(href);
+---
+
+<nav class="flex gap-4">
+  {
+    links.map((link) => (
+      <a href={link.href} class={isActive(link.href) ? "highlight" : ""}>
+        {link.text}
+      </a>
+    ))
+  }
+</nav>

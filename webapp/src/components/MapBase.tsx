@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { addProtocol, setWorkerUrl } from "maplibre-gl";
 import { Map, Source, Layer, type MapLayerMouseEvent } from "react-map-gl/maplibre";
@@ -10,10 +8,10 @@ setWorkerUrl(new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url)
 addProtocol("pmtiles", new Protocol().tile);
 
 // Racine des pmtiles, figee au build (export statique) :
-// - non definie : webapp/public/data (just parquet_to_pmtiles)
+// - non definie : public/data (just parquet_to_pmtiles)
 // - dev_s3 : bucket Garage local servi en web (just garage_web)
 // - pre-prod : bucket Cellar public, defini dans l'env de l'app Clever Cloud
-const PMTILES_URL = (process.env.NEXT_PUBLIC_PMTILES_URL ?? "/data").replace(/\/$/, "");
+const PMTILES_URL = (import.meta.env.PUBLIC_PMTILES_URL ?? "/data").replace(/\/$/, "");
 
 const nombre = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 
@@ -60,20 +58,19 @@ export default function MapBase() {
             type="fill"
             source-layer="ips_lycees_par_commune"
             paint={{
-              "fill-opacity" : 0.7,
+              "fill-opacity": 0.7,
               "fill-color": [
-                    "case",
-                    ["==", ["get", "ips_moyen"], null], "#c9c8c3",
-                    ["<", ["get", "ips_moyen"], 50], "#86b6ef",
-                    ["<", ["get", "ips_moyen"], 80], "#3987e5",
-                    ["<", ["get", "ips_moyen"], 100], "#1c5cab",
-                    "#0d366b",
-                  ],
-                }}
-        />
-      </Source>
-
-    </Map>
+                "case",
+                ["==", ["get", "ips_moyen"], null], "#c9c8c3",
+                ["<", ["get", "ips_moyen"], 50], "#86b6ef",
+                ["<", ["get", "ips_moyen"], 80], "#3987e5",
+                ["<", ["get", "ips_moyen"], 100], "#1c5cab",
+                "#0d366b",
+              ],
+            }}
+          />
+        </Source>
+      </Map>
       {survol && (
         <div
           className="pointer-events-none absolute z-10 rounded bg-white px-2 py-1 text-sm text-neutral-900 shadow"
