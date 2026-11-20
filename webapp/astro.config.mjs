@@ -26,6 +26,6 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Libre Baskerville",
       cssVariable: "--font-libre-baskerville",
-    }
-  ]
+    },
+  ],
 });

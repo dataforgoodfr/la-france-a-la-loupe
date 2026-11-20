@@ -11,16 +11,13 @@ const links = [
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 
-const isActive = (href: string) =>
-  href === "/" ? pathname === href : pathname.startsWith(href);
+const isActive = (href: string) => (href === "/" ? pathname === href : pathname.startsWith(href));
 ---
 
 <nav class="flex gap-4">
-  {
-    links.map((link) => (
-      <a href={link.href} class={isActive(link.href) ? "highlight" : ""}>
-        {link.text}
-      </a>
-    ))
-  }
+  {links.map((link) => (
+    <a href={link.href} class={isActive(link.href) ? "highlight" : ""}>
+      {link.text}
+    </a>
+  ))}
 </nav>

@@ -1,0 +1,5 @@
+{
+  "git.openRepositoryInParentFolders": "always",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode"
+}
