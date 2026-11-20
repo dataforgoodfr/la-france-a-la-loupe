@@ -52,6 +52,16 @@ repos:
         require_serial: true
         stages: [pre-push]
 
+  # Webapp tools run from webapp/node_modules, installed with `npm ci` in webapp/
+  - repo: local
+    hooks:
+      - id: oxfmt
+        name: "🟠 webapp · Format with oxfmt"
+        entry: webapp/node_modules/.bin/oxfmt --config webapp/.oxfmtrc.json --no-error-on-unmatched-pattern
+        language: system
+        files: ^webapp/.*\.(astro|cjs|css|js|json|jsonc|jsx|md|mdx|mjs|ts|tsx|ya?ml)$
+        require_serial: true
+
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.38.2
     hooks:
