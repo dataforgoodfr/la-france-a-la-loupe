@@ -136,8 +136,13 @@ venv.bak/
 .spyderproject
 .spyproject
 
-# VS Code
-.vscode
+# VS Code (contents only, so the folder itself is not excluded)
+**/.vscode/*
+
+# Shared vscode config for the webapp folder
+!/webapp/.vscode/settings.json
+!/webapp/.vscode/extensions.json
+!/webapp/.vscode/launch.json
 
 # Rope project settings
 .ropeproject

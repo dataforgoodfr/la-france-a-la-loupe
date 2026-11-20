@@ -49,10 +49,7 @@ type ResolvedValue = {
 };
 
 const read = (name: string): Record<string, unknown> =>
-  JSON.parse(fs.readFileSync(path.join(tokenDir, name), "utf8")) as Record<
-    string,
-    unknown
-  >;
+  JSON.parse(fs.readFileSync(path.join(tokenDir, name), "utf8")) as Record<string, unknown>;
 
 const mode = read("Mode 1.tokens.json");
 const light = read("Ligth.tokens.json");
@@ -80,11 +77,7 @@ function leaves(node: unknown, prefix: string[] = [], out: Leaf[] = []): Leaf[] 
   return out;
 }
 
-function walkMap(
-  node: unknown,
-  prefix: string[] = [],
-  map: TokenMap = new Map(),
-): TokenMap {
+function walkMap(node: unknown, prefix: string[] = [], map: TokenMap = new Map()): TokenMap {
   for (const leaf of leaves(node, prefix)) map.set(leaf.path, leaf.node);
   return map;
 }
@@ -189,7 +182,10 @@ function typographyName(dotted: string): string {
   if (parts[0] === "font-family") return `--font-family-${kebab(parts[1])}`;
   if (parts[0] === "font-weight") return `--font-weight-${kebab(parts[1])}`;
   if (parts[0] === "font-size") {
-    let rest = parts.slice(1).map(kebab).filter((part) => part !== "default");
+    let rest = parts
+      .slice(1)
+      .map(kebab)
+      .filter((part) => part !== "default");
     rest = rest.map((part) => (part === "txt" ? "text" : part));
     if (rest.length === 2 && rest[0] === rest[1]) rest.pop();
     return `--font-size-${rest.join("-")}`;
@@ -372,13 +368,7 @@ const push = (line = ""): void => {
   lines.push(line);
 };
 
-function emit(
-  dotted: string,
-  node: TokenNode,
-  name: string,
-  kind: Kind,
-  indent = "  ",
-): void {
+function emit(dotted: string, node: TokenNode, name: string, kind: Kind, indent = "  "): void {
   handled.add(dotted);
   const resolved = resolve(dotted, node, kind);
   const comment = resolved.comment ? ` /* ${resolved.comment} */` : "";
@@ -421,9 +411,7 @@ for (const palette of PALETTE_ORDER) {
   const prefix = `Colors.${palette}.`;
   const steps = [...modeLeaves.keys()]
     .filter((key) => key.startsWith(prefix))
-    .sort(
-      (a, b) => Number(a.slice(prefix.length)) - Number(b.slice(prefix.length)),
-    );
+    .sort((a, b) => Number(a.slice(prefix.length)) - Number(b.slice(prefix.length)));
   for (const dotted of steps) {
     emit(dotted, modeLeaves.get(dotted)!, modeName(dotted), "color");
   }
@@ -432,18 +420,14 @@ for (const palette of PALETTE_ORDER) {
 
 /* Spacing */
 push("  /* Spacing */");
-for (const dotted of [...modeLeaves.keys()].filter((key) =>
-  key.startsWith("Spacing."),
-)) {
+for (const dotted of [...modeLeaves.keys()].filter((key) => key.startsWith("Spacing."))) {
   emit(dotted, modeLeaves.get(dotted)!, modeName(dotted), "number");
 }
 push();
 
 /* Radius */
 push("  /* Radius */");
-for (const dotted of [...modeLeaves.keys()].filter((key) =>
-  key.startsWith("Radius."),
-)) {
+for (const dotted of [...modeLeaves.keys()].filter((key) => key.startsWith("Radius."))) {
   emit(dotted, modeLeaves.get(dotted)!, modeName(dotted), "number");
 }
 push();
@@ -463,12 +447,7 @@ for (const dotted of [
   "font-family.chip",
   "font-family.alert",
 ]) {
-  emit(
-    dotted,
-    desktopLeaves.get(dotted)!,
-    typographyName(dotted),
-    "font-family",
-  );
+  emit(dotted, desktopLeaves.get(dotted)!, typographyName(dotted), "font-family");
 }
 push();
 
@@ -479,12 +458,7 @@ for (const [title, role] of [
   push(`  /* ${title} sizes */`);
   for (const level of ["h1", "h2", "h3", "h4"]) {
     const dotted = `font-size.${role}.${level}`;
-    emit(
-      dotted,
-      desktopLeaves.get(dotted)!,
-      typographyName(dotted),
-      "font-size",
-    );
+    emit(dotted, desktopLeaves.get(dotted)!, typographyName(dotted), "font-size");
   }
   push();
 }
@@ -513,12 +487,7 @@ for (const dotted of [
   "font-weight.semibold",
   "font-weight.bold",
 ]) {
-  emit(
-    dotted,
-    desktopLeaves.get(dotted)!,
-    typographyName(dotted),
-    "font-weight",
-  );
+  emit(dotted, desktopLeaves.get(dotted)!, typographyName(dotted), "font-weight");
 }
 push();
 
@@ -669,16 +638,12 @@ for (const [label, tokenMap] of [
 }
 
 const output = `${lines.join("\n")}\n`;
-const previous = fs.existsSync(outputFile)
-  ? fs.readFileSync(outputFile, "utf8")
-  : "";
+const previous = fs.existsSync(outputFile) ? fs.readFileSync(outputFile, "utf8") : "";
 fs.writeFileSync(outputFile, output, "utf8");
 
 const relativeOutput = path.relative(projectDir, outputFile);
 console.log(
-  previous === output
-    ? `${relativeOutput} is already up to date`
-    : `Wrote ${relativeOutput}`,
+  previous === output ? `${relativeOutput} is already up to date` : `Wrote ${relativeOutput}`,
 );
 console.log(
   `  ${modeLeaves.size + lightLeaves.size + desktopLeaves.size} tokens, ` +
