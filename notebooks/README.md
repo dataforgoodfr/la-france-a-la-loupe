@@ -28,9 +28,16 @@ Autrement vous pouvez ouvrir Marimo et utiliser son explorateur :
 uv run marimo edit
 ```
 
-## Notebook de démonstration
+## Notebooks de démonstration
 
+### Exemple de transformations et de visualisations en Python
 Dans ce notebook, vous trouverez un exemple d'analyse très basique à partir d'un jeu de données.
 ```bash
 uv run marimo edit notebooks/education/reussite_bac_origine_sociale.py
+```
+
+### Exemple d'analyse et de transformations en SQL
+
+```bash
+uv run marimo edit notebooks/education/valeur_ajoutee_colleges.py
 ```
