@@ -175,5 +175,8 @@ dbt/lfe4/.user.yml
 # data
 data
 
+# MacOS
+.DS_Store
+
 # marimo
 __marimo__/
