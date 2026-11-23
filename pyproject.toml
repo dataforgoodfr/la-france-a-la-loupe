@@ -39,7 +39,10 @@ dev = [
     "sqlfluff>=4.4.0",
     "sqlfluff-templater-dbt>=4.4.0",
     "rust-just",
-    "marimo[recommended,sql]>=0.25.2",
+    "duckdb<2",
+    "geopandas>=1.2.0",
+    "marimo[recomended]>=0.25.2",
+    "altair>=6.3.0",
 ]
 
 [tool.hatch.build.targets.wheel]

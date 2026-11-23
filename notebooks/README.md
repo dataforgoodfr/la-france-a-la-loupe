@@ -36,7 +36,7 @@ Dans ce notebook, vous trouverez un exemple d'analyse très basique à partir d'
 uv run marimo edit notebooks/education/reussite_bac_origine_sociale.py
 ```
 
-### Exemple d'analyse et de transformations en SQL
+### Exemple d'analyse et de transformations en "pur" SQL
 
 ```bash
 uv run marimo edit notebooks/education/valeur_ajoutee_colleges.py
