@@ -23,6 +23,7 @@ dependencies = [
     "requests>=2.32.3",
     "xlrd>=2.0.2",
 ]
+
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
@@ -41,8 +42,8 @@ dev = [
     "rust-just",
     "duckdb<2",
     "geopandas>=1.2.0",
-    "marimo[recomended]>=0.25.2",
-    "altair>=6.3.0",
+    "loro<1.19.0",
+    "marimo[recommended]>=0.25.2",
 ]
 
 [tool.hatch.build.targets.wheel]

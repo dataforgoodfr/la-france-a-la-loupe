@@ -154,10 +154,11 @@ def _(mo, url_parquet_va_colleges):
     return (staging,)
 
 
-@app.cell
-def _():
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     ### Intermediate
-    return
+    """)
 
 
 @app.cell(hide_code=True)
