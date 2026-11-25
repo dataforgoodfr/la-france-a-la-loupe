@@ -15,17 +15,17 @@ export default defineConfig({
     {
       provider: fontProviders.fontsource(),
       name: "Anton",
-      cssVariable: "--font-anton",
+      cssVariable: "--font-family-anton",
     },
     {
       provider: fontProviders.fontsource(),
       name: "Montserrat",
-      cssVariable: "--font-montserrat",
+      cssVariable: "--font-family-montserrat",
     },
     {
       provider: fontProviders.fontsource(),
       name: "Libre Baskerville",
-      cssVariable: "--font-libre-baskerville",
+      cssVariable: "--font-family-libre-baskerville",
     },
   ],
 });
