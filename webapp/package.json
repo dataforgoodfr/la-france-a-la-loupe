@@ -1,17 +1,16 @@
 {
   "name": "webapp-astro",
-  "type": "module",
-  "private": true,
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.23.4"
-  },
+  "private": true,
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "tokens": "node scripts/build-tokens.ts",
-    "astro": "astro"
+    "astro": "astro",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.8",
@@ -30,6 +29,11 @@
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
-    "@types/node": "^22.20.5"
+    "@astrojs/compiler-rs": "^0.5.3",
+    "@types/node": "^22.20.5",
+    "oxfmt": "^0.79.0"
+  },
+  "engines": {
+    "node": ">=22.23.4"
   }
 }
