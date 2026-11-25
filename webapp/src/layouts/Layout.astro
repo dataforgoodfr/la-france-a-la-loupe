@@ -1,10 +1,16 @@
 ---
+import { Font } from "astro:assets";
 import "../styles/global.css";
+import "../styles/tokens.css";
 ---
 
 <!doctype html>
 <html lang="fr" class="h-full antialiased">
 	<head>
+		<Font cssVariable="--font-montserrat" />
+		<Font cssVariable="--font-anton" />
+		<Font cssVariable="--font-libre-baskerville" />
+
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
