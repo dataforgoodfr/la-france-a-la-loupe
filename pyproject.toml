@@ -23,6 +23,7 @@ dependencies = [
     "requests>=2.32.3",
     "xlrd>=2.0.2",
 ]
+
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
@@ -39,6 +40,9 @@ dev = [
     "sqlfluff>=4.4.0",
     "sqlfluff-templater-dbt>=4.4.0",
     "rust-just",
+    "duckdb<2",
+    "geopandas>=1.2.0",
+    "loro<1.19.0",
     "marimo[recommended]>=0.25.2",
 ]
 
