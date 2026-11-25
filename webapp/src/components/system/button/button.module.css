@@ -1,0 +1,159 @@
+:root {
+  --btn-height: 40px;
+}
+
+@media (width < 48rem) {
+  :root {
+    --btn-height: 51px;
+  }
+}
+
+.btn {
+  border-radius: var(--btn-shape-radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-space-gap);
+  font-family: var(--btn-typography-font-family);
+  font-size: var(--btn-typography-font-size);
+  line-height: var(--btn-typography-font-size);
+  color: var(--btn-local-text-color);
+  background-color: var(--btn-local-background-color);
+  border: none;
+  position: relative;
+  font-weight: 600;
+  padding: 0;
+}
+/* Using before for the border so it's not part of the layout (keep same size with and without border without adjusting the button size and padding) */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-width: var(--btn-shape-border-width);
+  border-style: solid;
+  border-color: var(--btn-local-border-color);
+  border-radius: inherit;
+  pointer-events: none;
+}
+/* Using after for focus ring*/
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: calc(-2 * var(--btn-shape-border-width));
+  border-width: var(--btn-shape-border-width);
+  border-style: solid;
+  border-color: var(--btn-local-focus-ring-color, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn:hover,
+.btn[data-hover="true"] {
+  cursor: pointer;
+}
+.btn:disabled,
+.btn[data-disabled="true"] {
+  cursor: not-allowed;
+}
+.btn:focus-visible,
+.btn[data-focus-visible="true"] {
+  --btn-local-focus-ring-color: var(--btn-fill-state-focus);
+  outline: none;
+}
+
+.btn_variant_fill {
+  --btn-local-background-color: var(--btn-local-main-color);
+  --btn-local-border-color: transparent;
+  --btn-local-text-color: var(--color-white);
+  height: var(--btn-height);
+  padding-inline: var(--btn-space-padding-x);
+}
+.btn_variant_fill:hover,
+.btn_variant_fill[data-hover="true"] {
+  --btn-local-background-color: color-mix(in srgb, black 15%, var(--btn-local-main-color));
+}
+.btn_variant_fill:active,
+.btn_variant_fill[data-active="true"] {
+  --btn-local-background-color: color-mix(in srgb, black 30%, var(--btn-local-main-color));
+}
+.btn_variant_fill:disabled,
+btn_variant_fill[data-disabled="true"] {
+  --btn-local-background-color: color-mix(in srgb, white 35%, var(--btn-local-main-color));
+}
+
+.btn_variant_outline {
+  --btn-local-background-color: transparent;
+  --btn-local-border-color: var(--btn-local-main-color);
+  --btn-local-text-color: var(--btn-local-border-color);
+  height: var(--btn-height);
+  padding-inline: var(--btn-space-padding-x);
+}
+.btn_variant_outline:hover,
+.btn_variant_outline[data-hover="true"] {
+  --btn-local-background-color: var(--btn-local-outline-hover-color);
+  --btn-local-border-color: color-mix(in srgb, black 15%, var(--btn-local-main-color));
+}
+.btn_variant_outline:active,
+.btn_variant_outline[data-active="true"] {
+  --btn-local-background-color: var(--btn-local-outline-pressed-color);
+  --btn-local-border-color: color-mix(in srgb, black 30%, var(--btn-local-main-color));
+}
+.btn_variant_outline:disabled,
+btn_variant_outline[data-disabled="true"] {
+  --btn-local-border-color: color-mix(in srgb, white 35%, var(--btn-local-main-color));
+  --btn-local-background-color: transparent;
+}
+
+.btn_variant_link {
+  --btn-local-background-color: transparent;
+  --btn-local-border-color: transparent;
+  --btn-local-text-color: var(--btn-local-main-color);
+  text-decoration: underline;
+}
+.btn_variant_link:hover,
+.btn_variant_link[data-hover="true"] {
+  --btn-local-text-color: color-mix(in srgb, black 15%, var(--btn-local-main-color));
+}
+.btn_variant_link:active,
+.btn_variant_link[data-active="true"] {
+  --btn-local-text-color: color-mix(in srgb, black 30%, var(--btn-local-main-color));
+}
+.btn_variant_link:disabled,
+btn_variant_link[data-disabled="true"] {
+  --btn-local-text-color: color-mix(in srgb, white 35%, var(--btn-local-main-color));
+}
+
+.btn_sentiment_primary {
+  --btn-local-main-color: var(--btn-primary-color-fill);
+  --btn-local-outline-hover-color: var(--btn-primary-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-primary-outline-state-pressed);
+}
+
+.btn_sentiment_success {
+  --btn-local-main-color: var(--btn-success-color-fill);
+  --btn-local-outline-hover-color: var(--btn-success-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-success-outline-state-pressed);
+}
+
+.btn_sentiment_danger {
+  --btn-local-main-color: var(--btn-error-color-fill);
+  --btn-local-outline-hover-color: var(--btn-error-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-error-outline-state-pressed);
+}
+
+.btn_sentiment_warning {
+  --btn-local-main-color: var(--btn-warning-color-fill);
+  --btn-local-outline-hover-color: var(--btn-warning-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-warning-outline-state-pressed);
+}
+
+.btn_sentiment_error {
+  --btn-local-main-color: var(--btn-error-color-fill);
+  --btn-local-outline-hover-color: var(--btn-error-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-error-outline-state-pressed);
+}
+
+.btn_sentiment_neutral {
+  --btn-local-main-color: var(--btn-default-color-fill);
+  --btn-local-outline-hover-color: var(--btn-default-outline-state-hover);
+  --btn-local-outline-pressed-color: var(--btn-default-outline-state-pressed);
+}
