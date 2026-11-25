@@ -21,6 +21,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Montserrat",
       cssVariable: "--font-family-montserrat",
+      weights: [400, 500, 600],
     },
     {
       provider: fontProviders.fontsource(),

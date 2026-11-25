@@ -1,0 +1,58 @@
+---
+import type { ButtonSentiment, ButtonVariant } from "../../components/system/button";
+import { Button } from "../../components/system/button";
+import { Title } from "../../components/system/typography";
+import Layout from "../../layouts/Layout.astro";
+
+const variants: ButtonVariant[] = ["fill", "outline", "link"] as const;
+const sentiments: ButtonSentiment[] = [
+  "primary",
+  "success",
+  "danger",
+  "warning",
+  "error",
+  "neutral",
+] as const;
+const states = ["default", "hover", "pressed", "disabled", "focus"] as const;
+---
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-16);
+    padding: var(--space-16);
+    justify-items: center;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    align-content: center;
+  }
+</style>
+
+<Layout>
+  <div>
+    <p>Page temporaire pour tester les variantes du Button</p>
+    {sentiments.map((sentiment) => (
+      <div>
+        <Title level="h2" style={{ textAlign: "center" }}>
+          {sentiment}
+        </Title>
+        <div class="grid">
+          {variants.flatMap((variant) =>
+            states.map((state) => (
+              <Button
+                sentiment={sentiment}
+                variant={variant}
+                data-hover={state === "hover"}
+                data-active={state === "pressed"}
+                disabled={state === "disabled"}
+                data-focus-visible={state === "focus"}
+              >
+                Label
+              </Button>
+            )),
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</Layout>

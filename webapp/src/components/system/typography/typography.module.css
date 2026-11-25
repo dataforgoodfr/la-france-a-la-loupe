@@ -1,0 +1,19 @@
+.title {
+  font-family: var(--font-family-title);
+}
+
+.headin_level_h1 {
+  font-size: var(--font-size-title-h1);
+}
+
+.headin_level_h2 {
+  font-size: var(--font-size-title-h2);
+}
+
+.headin_level_h3 {
+  font-size: var(--font-size-title-h3);
+}
+
+.headin_level_h4 {
+  font-size: var(--font-size-title-h4);
+}
