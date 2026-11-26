@@ -17,7 +17,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 ## Installation et IDE
 
-Il est recommandé d'utiliser [VSCode](https://code.visualstudio.com/) pour ce projet. Vous etes evidement libre d'utiliser un autre éditeur mais vous devrez alors le configurer vous-même.
+Il est recommandé d'utiliser [VSCode](https://code.visualstudio.com/) pour ce projet. Vous êtes évidemment libre d'utiliser un autre éditeur mais vous devrez alors le configurer vous-même.
 
 ### Ouvrir le Workspace
 
@@ -25,11 +25,11 @@ Le dossier `webapp` contient l'application web et possède sa propre configurati
 
 Pour que ces paramètres et extensions spécifiques soient pris en compte, vous devez ouvrir le dossier `webapp` directement dans VSCode.
 
-Si vous ouvrer le dossier racine du projet (`la-france-a-la-loupe`) dans VSCode, les paramètres spécifiques au dossier `webapp` ne seront pas appliqués automatiquement.
+Si vous ouvrez le dossier racine du projet (`la-france-a-la-loupe`) dans VSCode, les paramètres spécifiques au dossier `webapp` ne seront pas appliqués automatiquement.
 
 ### Installer les dépendances
 
-Pour installer les dépendances du projet, ouvrez un terminal dans le dossier `webapp` et exécutez la commande suivante:
+Pour installer les dépendances du projet, ouvrez un terminal dans le dossier `webapp` et exécutez la commande suivante :
 
 ```bash
 npm install
@@ -52,3 +52,14 @@ L'application "La France à la Loupe" utilise les technologies suivantes :
 - [Astro](https://astro.build/) pour le framework web et la structure des pages
 - [React](https://react.dev/) pour la création des composants
 - [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) pour le formatage du code
+
+## Synchronisation des Design Token
+
+Les variables CSS définies dans `src/styles/tokens.css` viennent de Figma. Voici les étapes à suivre pour les mettre à jour:
+
+- Connectez-vous avec le compte Designer sur le fichier de Design System (voir avec les designers)
+- Ouvrez le plugin `variables2css` : cliquez sur le logo Figma, puis « Plugins ».
+- Sélectionnez toutes les collections, laissez les réglages par défaut et cliquez sur « Generate » puis « Copy ».
+- Collez le résultat dans `src/styles/tokens-extracted.css`
+- Lancez la commande `npm run tokens`.
+- Faites un commit avec les changements puis ouvrez une nouvelle Pull Request.
