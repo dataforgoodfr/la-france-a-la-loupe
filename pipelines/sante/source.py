@@ -22,7 +22,7 @@ def medecins_2012_2026():
     # DREES : effectifs des professionnels de sante 2012-2026 (repertoire Adeli), .xls
     return file_resource(
         bucket_url="https://data.drees.solidarites-sante.gouv.fr/api/datasets/1.0/la-demographie-des-professionnels-de-sante-depuis-2012/attachments/",
-        file_glob="medecins_rpps_2012_2026_xlsx/",
+        file_glob="medecins_rpps_2012_2026xlsx/",
         resource_name="medecins_rpps_2012_2026",
         reader=read_excel,
     )
