@@ -13,21 +13,25 @@ export default defineConfig({
   },
 
   integrations: [react()],
+
   fonts: [
     {
       provider: fontProviders.fontsource(),
       name: "Anton",
       cssVariable: "--font-family-anton",
+      weights: [400],
     },
     {
       provider: fontProviders.fontsource(),
       name: "Montserrat",
       cssVariable: "--font-family-montserrat",
+      weights: [300, 400, 600, 700],
     },
     {
       provider: fontProviders.fontsource(),
       name: "Libre Baskerville",
       cssVariable: "--font-family-libre-baskerville",
+      weights: [400, 600, 700],
     },
   ],
 });
