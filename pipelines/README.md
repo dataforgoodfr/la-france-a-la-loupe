@@ -83,7 +83,9 @@ def bnvd_achats():
         bucket_url=OFB_BNVD,
         file_glob="BNVD_TRACABILITE_2024_ACHAT_2019-2023.zip",
         resource_name="bnvd_achats",
-        reader=read_zip({".csv": partial(read_csv, separator=";"), ".xlsx": read_excel}),
+        reader=read_zip(
+            {".csv": partial(read_csv, separator=";"), ".xlsx": read_excel}
+        ),
     )
 ```
 
@@ -119,8 +121,8 @@ Dans `utils/sources_utils.py`. Un reader prend les bytes du fichier et yield les
 Paramétrer avec `partial` :
 
 ```python
-reader=partial(read_excel, header_row=3)                     # header en 4e ligne
-reader=partial(read_csv, separator=",", encoding="latin-1")
+reader = partial(read_excel, header_row=3)  # header en 4e ligne
+reader = partial(read_csv, separator=",", encoding="latin-1")
 ```
 
 Pour ajouter un format, il faut écrire une fonction `(bytes) -> Iterator[tuple[str, TDataItems]]` dans `sources_utils.py`.
