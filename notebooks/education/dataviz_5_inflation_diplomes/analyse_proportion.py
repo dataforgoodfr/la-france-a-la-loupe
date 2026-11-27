@@ -7,9 +7,10 @@ app = marimo.App()
 @app.cell
 def _():
     import datetime
-    import pandas as pd
+
     import marimo as mo
     import matplotlib.pyplot as plt
+    import pandas as pd
 
     return datetime, mo, pd, plt
 
@@ -19,7 +20,6 @@ def _(mo):
     mo.md(r"""
     API du ministère de l'éducation nationale
     """)
-    return
 
 
 @app.cell
@@ -34,7 +34,6 @@ def _(mo):
     mo.md(r"""
     Fonction pour extraire en parquet de la donnée à partir d'un dataset_id
     """)
-    return
 
 
 @app.cell
@@ -55,7 +54,6 @@ def _(mo):
     mo.md(r"""
     On récupère le dataset de la propotion de bachier
     """)
-    return
 
 
 @app.cell
@@ -74,31 +72,21 @@ def _(DATASET_ID, get_dataset_parquet):
 @app.cell
 def _(df):
     df.info()
-    return
-
-
-@app.cell
-def _(datetime, df):
-    df_2024 = df[df["annee"] == datetime.date(2024, 1, 1)]
-    return
 
 
 @app.cell
 def _(df):
     df.head()
-    return
 
 
 @app.cell
 def _(df):
     df["caracteristique"].unique()
-    return
 
 
 @app.cell
 def _(df):
     df[df["caracteristique"] == "données provisoires"]
-    return
 
 
 @app.cell(hide_code=True)
@@ -108,7 +96,6 @@ def _(mo):
         - On veut le pourcentage par génération
         - On prend uniquement les données définitives (sinon il y a des doublons de séries ex. pour l'année 1971 il y aura deux fois le bac général, ...)
     """)
-    return
 
 
 @app.cell
@@ -118,75 +105,104 @@ def _(df):
     return (df2,)
 
 
-@app.cell
-def _(df2):
-    df2
-    return
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     Vue global: Tous baccalauréats
     """)
-    return
-
-
-@app.cell
-def _(df2):
-    df3 = df2[df2["serie"] == "Tous baccalauréats"].sort_values(by=["annee"])
-    return
 
 
 @app.cell
 def _(df2):
     df2.sort_values(by=["annee"], inplace=True)
-    return
 
 
 @app.cell
 def _(df2):
-    y_tous = df2[df2["serie"] == "Tous baccalauréats"]["pourcentage_de_bacheliers_dans_une_generation"]
+    y_tous = df2[df2["serie"] == "Tous baccalauréats"][
+        ["annee", "pourcentage_de_bacheliers_dans_une_generation"]
+    ]
 
-    y_gen = df2[df2["serie"] == "Bac général"]["pourcentage_de_bacheliers_dans_une_generation"]
+    y_gen = df2[df2["serie"] == "Bac général"][
+        ["annee", "pourcentage_de_bacheliers_dans_une_generation"]
+    ]
 
-    y_techno = df2[df2["serie"] == "Bac technologique"]["pourcentage_de_bacheliers_dans_une_generation"]
+    y_techno = df2[df2["serie"] == "Bac technologique"][
+        ["annee", "pourcentage_de_bacheliers_dans_une_generation"]
+    ]
 
-    y_pro = df2[df2["serie"] == "Bac professionnel"]["pourcentage_de_bacheliers_dans_une_generation"]
+    y_pro = df2[df2["serie"] == "Bac professionnel"][
+        ["annee", "pourcentage_de_bacheliers_dans_une_generation"]
+    ]
     return y_gen, y_pro, y_techno, y_tous
 
 
 @app.cell
-def _(df):
-    x = df["annee"].unique()
-    return (x,)
-
-
-@app.cell
-def _(y_gen, y_pro, y_techno, y_tous):
-    print(len(y_tous), len(y_gen), len(y_techno), len(y_pro))
-    return
-
-
-@app.cell
-def _(df, plt, x, y_tous):
-    plt.title("Proportion de tous les bachelers au cours des années")
-    plt.plot(x, y_tous, label="Tous baccalauréats")
-    plt.plot()
-    plt.plot(df)
-    plt.legend()
-    return
-
-
-@app.cell
 def _(df2):
-    df2.plot(x="annee", y=["pourcentage_de_bacheliers_dans_une_generation"] )
-    return
+    type(df2["annee"])
 
 
 @app.cell
-def _():
-    return
+def _(plt, y_gen, y_pro, y_techno, y_tous):
+    plt.title("Proportion de tous les bachelers au cours des années")
+    plt.plot(
+        y_tous["annee"],
+        y_tous["pourcentage_de_bacheliers_dans_une_generation"],
+        label="Tous baccalauréats",
+    )
+    plt.plot(
+        y_gen["annee"],
+        y_gen["pourcentage_de_bacheliers_dans_une_generation"],
+        label="Gen",
+    )
+    plt.plot(
+        y_techno["annee"],
+        y_techno["pourcentage_de_bacheliers_dans_une_generation"],
+        label="Techno",
+    )
+    plt.plot(
+        y_pro["annee"],
+        y_pro["pourcentage_de_bacheliers_dans_une_generation"],
+        label="Pro",
+    )
+    plt.legend()
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    A expliquer:
+
+    - Pique en 2010 des bac pro => Possible réforme de Sarko sur pour envoyer ceux qui abandonne la seconde et après la 3ème en bac pro: https://www.letudiant.fr/educpros/actualite/bilan-du-quinquennat-sarkozy-un-bac-pro-en-trois-ans-bien-installe.html
+
+    - Croissance à partir de 1990 des bac gen
+
+    - Explosion du nombre de bachelier en 1997 => Pourrait correspondre à la période de baby-boom en france (pas sûre): https://fr.wikipedia.org/wiki/Baby-boom#/media/Fichier:Taux_de_natalit%C3%A9_en_France_de_1901_%C3%A0_2016.svg
+
+    - Petit pique du bac techno en 1992 => Réforme avec la création de filière STI, STT (https://fr.wikipedia.org/wiki/Baccalaur%C3%A9at_technologique#1992%E2%80%932007)
+    """)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    On observe bien une inflation des diplômes au fil des années
+    Depuis 2010 on a une très grosse montée des diplomés et ça ne fait que de croître.
+
+    On peut se poser comme question:
+    - Par région comment ça se passe ? La variation de bachelier par région
+    - Combien travail après le BAC
+    - Combien entre à l'université et combien en sont diplomé. Regarder la répartition bachelier gen, tech, pro
+    - Combien vont en BTS/DUT ou formation professionnalisante et combien en sont diplomé. Regarder la répartition bachelier gen, tech, pro
+    - Est-ce qu'il y a suffisemment de place pour acceuillir ses étudiants ?
+    - La direction que prends les étudiants en fonction du cursus d'étude sup
+    - Pourquoi les élèves veulent faire des études longues
+    - Regarder le CAP
+    - Regarder le VAE (diplôme obtenu après une expérience pro)
+    - L'algorithme est-il une solution pour gérer l'augmentation des élèves et les limites sturcturelles ?
+    - Comment cette inflation fait baisser la valeur des diplomes et aussi créer des privilièges ?
+    - Quels sont les nouveaux critères ?
+    """)
 
 
 @app.cell
