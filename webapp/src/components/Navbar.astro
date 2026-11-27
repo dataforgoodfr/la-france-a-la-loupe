@@ -14,10 +14,54 @@ const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActive = (href: string) => (href === "/" ? pathname === href : pathname.startsWith(href));
 ---
 
-<nav class="flex gap-4">
-  {links.map((link) => (
-    <a href={link.href} class={isActive(link.href) ? "highlight" : ""}>
-      {link.text}
-    </a>
-  ))}
+<style>
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-16);
+    align-items: center;
+    background-color: var(--color-gray-100);
+    border-radius: var(--radius-24);
+    color: var(--color-gray-900);
+    font-family: var(--font-family-text);
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-regular);
+    gap: var(--space-24);
+    padding: var(--space-16) var(--space-24);
+  }
+
+  .links {
+    display: none;
+  }
+
+  .highlight {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .logo {
+    margin-right: auto;
+  }
+
+  @media (width >= 1000px) {
+    .links {
+      display: flex;
+      gap: var(--space-24);
+    }
+
+    .menu-button {
+      display: none;
+    }
+  }
+</style>
+
+<nav class="navbar">
+  <div class="logo">Logo</div>
+  <div class="links">
+    {links.map((link) => (
+      <a href={link.href} class={isActive(link.href) ? "highlight" : ""}>
+        {link.text}
+      </a>
+    ))}
+  </div>
+  <button class="menu-button">Menu</button>
 </nav>

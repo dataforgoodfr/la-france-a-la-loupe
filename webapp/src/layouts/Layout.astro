@@ -2,24 +2,63 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import "../styles/tokens.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const SITE_NAME = "La France à la loupe";
+const { title, description = "Une collaboration Data For Good et The Conversation" } = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="fr" class="h-full antialiased">
+<html lang="fr" dir="ltr" class="h-full antialiased">
   <head>
-    <Font cssVariable="--font-montserrat" />
-    <Font cssVariable="--font-anton" />
-    <Font cssVariable="--font-libre-baskerville" />
-
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f5f4ef" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <meta name="robots" content="index,follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
+    <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <meta name="generator" content={Astro.generator} />
-    <title>La France à la loupe</title>
-    <meta name="description" content="Une collaboration Data For Good et The Conversation" />
+
+    <Font cssVariable="--font-family-montserrat" />
+    <Font cssVariable="--font-family-anton" />
+    <Font cssVariable="--font-family-libre-baskerville" />
+
+    <slot name="head" />
   </head>
-  <body class="min-h-full flex flex-col">
+  <body class="min-h-dvh flex flex-col">
+    <a
+      href="#contenu"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+    >
+      Aller au contenu
+    </a>
     <slot />
   </body>
 </html>
