@@ -1,20 +1,12 @@
 ---
 import Navbar from "./Navbar.astro";
 
-type Props = { title: string; slug: string };
+type Props = { title: string };
 
-const { title, slug } = Astro.props;
+const { title } = Astro.props;
 ---
 
-<main>
+<main id="contenu">
   <Navbar />
   <h1>{title}</h1>
-  <p>Lorem ipsum...</p>
-  <iframe
-    src={`/${slug}/dataviz/`}
-    title={title}
-    allow-scripts="true"
-    allow="fullscreen *"
-    class="w-screen h-[50vh] border-0"
-  />
 </main>
