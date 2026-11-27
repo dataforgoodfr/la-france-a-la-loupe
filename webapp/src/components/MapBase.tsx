@@ -52,7 +52,11 @@ export default function MapBase() {
         onClick={suivre}
         onMouseLeave={() => setSurvol(null)}
       >
-        <Source id="communes" type="vector" url={`pmtiles://${PMTILES_URL}/ips_lycees_par_commune.pmtiles`}>
+        <Source
+          id="communes"
+          type="vector"
+          url={`pmtiles://${PMTILES_URL}/ips_lycees_par_commune.pmtiles`}
+        >
           <Layer
             id="communes-aplat"
             type="fill"
@@ -61,10 +65,14 @@ export default function MapBase() {
               "fill-opacity": 0.7,
               "fill-color": [
                 "case",
-                ["==", ["get", "ips_moyen"], null], "#c9c8c3",
-                ["<", ["get", "ips_moyen"], 50], "#86b6ef",
-                ["<", ["get", "ips_moyen"], 80], "#3987e5",
-                ["<", ["get", "ips_moyen"], 100], "#1c5cab",
+                ["==", ["get", "ips_moyen"], null],
+                "#c9c8c3",
+                ["<", ["get", "ips_moyen"], 50],
+                "#86b6ef",
+                ["<", ["get", "ips_moyen"], 80],
+                "#3987e5",
+                ["<", ["get", "ips_moyen"], 100],
+                "#1c5cab",
                 "#0d366b",
               ],
             }}

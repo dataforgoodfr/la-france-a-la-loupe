@@ -4,16 +4,6 @@ __generated_with = "0.25.2"
 app = marimo.App()
 
 
-@app.cell
-def _():
-    import altair as alt
-    import marimo as mo
-    import polars as pl
-    import requests
-
-    return alt, mo, pl, requests
-
-
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -28,16 +18,43 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Récupération des données depuis l'API
+    ## 1- Import des packages utiles
     """)
 
 
 @app.cell
-def _(pl, requests):
-    url_ds_reussite_bac = "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-reussite-au-baccalaureat-origine-sociale/records/"
+def _():
+    import altair as alt
+    import marimo as mo
+    import polars as pl
+    import requests
 
-    def fetch_all(url, limit=100):
-        """Récupère toutes les lignes à partir de l'API data.education.gouv"""
+    return alt, mo, pl, requests
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## 2 - Téléchargement des données
+
+    ### Option 1 - récupération des données via l'API
+
+    La difficulté est que l'API publique de education.data.gouv limite les appels à 10 000 lignes, il n'est donc possible de passer au-delà qu'en passant un token de login (pas développé). Passer par l'API a peu d'intérêt si on utilise pas les paramètres de requêtage qu'elle propose.
+    """)
+
+
+@app.cell
+def _(requests):
+    # Fonction pour l'appel API
+    def fetch_all(url, limit=100, stop_at=0):
+        """Récupère les données paginées depuis une API ODS (data.education.gouv).
+
+        Args:
+            url: URL de l'endpoint /records.
+            limit: Taille de page (max 100 pour cette API).
+            stop_at: Plafond d'enregistrements à récupérer (0 = sans limite).
+                     Utile pour respecter le quota de l'API publique.
+        """
         all_rows = []
         offset = 0
         total = None
@@ -56,22 +73,69 @@ def _(pl, requests):
             all_rows.extend(results)
 
             offset += limit
+
+            # Troncature si stop_at est atteint
+            if stop_at > 0 and len(all_rows) >= stop_at:
+                all_rows = all_rows[:stop_at]
+                break
+
             if offset >= total or not results:
                 break
 
         print(f"Récupéré {len(all_rows)} / {total} enregistrements")
         return all_rows
 
-    # Appel API et intégration dans un dataset
-    records = fetch_all(url_ds_reussite_bac)
-    df = pl.DataFrame(records)
+    # URL de l'API
+    # url_api_reussite_bac = "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-reussite-au-baccalaureat-origine-sociale/records/"
+    # Appel API
+    # records = fetch_all(url_api_reussite_bac)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### Option 2 - Téléchargement du fichier Parquet
+
+    On télécharge obligatoirement l'ensemble des données sans possibilité de filtrer.
+    """)
+
+
+@app.cell
+def _(requests):
+    # URL du fichier parquet
+    url_parquet_reussite_bac = "https://data.education.gouv.fr/api/explore/v2.1/catalog/datasets/fr-en-reussite-au-baccalaureat-origine-sociale/exports/parquet/?lang=fr&timezone=Europe%2FParis"
+
+    def fetch_file(url):
+        response = requests.get(url)
+        response.raise_for_status()
+
+        return response.content
+
+    # Récupération des données
+    parquet_file = fetch_file(url_parquet_reussite_bac)
+    return (parquet_file,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    Selon l'option choisie, on créée la dataframe Polars à partir d'une des deux sources
+    """)
+
+
+@app.cell
+def _(parquet_file, pl):
+    ## Option 1 - API
+    # df = pl.DataFrame(records)
+    ## Option 2 - Fichier Parquet
+    df = pl.read_parquet(parquet_file)
     return (df,)
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Statistiques et visualisation interactive des données
+    ## 3 - Statistiques et visualisation interactive des données
     """)
 
 
@@ -90,7 +154,7 @@ def _(df, mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Graphique exploratoire
+    ## 4 - Graphique exploratoire
     """)
 
 
@@ -144,7 +208,7 @@ def _(alt, df, mo, pl, social_filter):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    # Analyse de test sur le cas des agriculteurs
+    ## 5 - Analyse de test sur le cas des agriculteurs
     """)
 
 
