@@ -1,0 +1,86 @@
+.chip {
+  --chip-local-fill-color: var(--chip-color-fill);
+  --chip-local-border-color: var(--chip-color-border);
+  --chip-local-text-color: var(--chip-color-text);
+  --chip-local-icon-color: var(--chip-color-icon);
+  --chip-local-state-color: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--chip-space-gap);
+  padding: calc(var(--chip-space-padding-y) + var(--chip-shape-border-width))
+    calc(var(--chip-space-padding-x) + var(--chip-shape-border-width));
+  position: relative;
+  border: none;
+  border-radius: var(--chip-shape-radius);
+  font-family: var(--chip-typography-font-family);
+  font-size: var(--chip-typography-font-size);
+  font-weight: 500;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  color: var(--chip-local-text-color);
+  background-color: var(--chip-local-fill-color);
+}
+
+.chip > svg {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  color: var(--chip-local-icon-color);
+}
+
+.chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-width: var(--chip-shape-border-width);
+  border-style: solid;
+  border-color: var(--chip-local-border-color);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--chip-local-state-color);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.chip:where(:enabled):is(:hover, [data-hover="true"]) {
+  --chip-local-fill-color: var(--chip-hover-color-fill);
+  cursor: pointer;
+}
+
+.chip:where(:enabled):is(:active, [data-active="true"]) {
+  --chip-local-fill-color: var(--chip-hover-color-fill);
+  --chip-local-state-color: var(--chip-fill-state-hover);
+}
+
+.chip[aria-pressed="true"] {
+  --chip-local-fill-color: var(--chip-selected-color-fill);
+  --chip-local-border-color: var(--chip-selected-color-border);
+  --chip-local-text-color: var(--chip-selected-color-text);
+  --chip-local-icon-color: var(--chip-selected-color-icon);
+}
+
+.chip[aria-pressed="true"]:where(:enabled):is(:hover, [data-hover="true"]) {
+  --chip-local-state-color: var(--chip-fill-state-hover);
+}
+
+.chip[aria-pressed="true"]:where(:enabled):is(:active, [data-active="true"]) {
+  --chip-local-state-color: var(--chip-fill-state-pressed);
+}
+
+.chip:disabled {
+  --chip-local-state-color: var(--chip-fill-state-disabled);
+  cursor: not-allowed;
+}
+
+.chip:is(:focus-visible, [data-focus-visible="true"]) {
+  outline: var(--chip-shape-focus-width) solid var(--chip-focus-color-border);
+  outline-offset: var(--chip-space-focus-offset);
+}

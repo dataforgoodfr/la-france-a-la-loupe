@@ -1,0 +1,70 @@
+---
+import { Chip } from "../../components/system/chip";
+import { Title } from "../../components/system/typography";
+import Layout from "../../layouts/Layout.astro";
+
+const states = [
+  { key: "default", legend: "Default" },
+  { key: "hover", legend: "Hover" },
+  { key: "pressed", legend: "Pressed" },
+  { key: "disabled", legend: "Disabled" },
+  { key: "focus", legend: "Focus" },
+] as const;
+const selections = [
+  { selected: false, title: "Non sélectionné" },
+  { selected: true, title: "Sélectionné" },
+] as const;
+const contents = [
+  { withIcon: false, legend: "Texte seul" },
+  { withIcon: true, legend: "Avec pictogramme" },
+] as const;
+---
+
+<Layout>
+  <div>
+    <p>Page temporaire pour tester les variantes du Chip</p>
+    {selections.map(({ selected, title }) => (
+      <section class="p-4">
+        <Title level="h2" style={{ textAlign: "center" }}>
+          {title}
+        </Title>
+        {contents.map(({ withIcon, legend }) => (
+          <>
+            <p class="mt-4 text-center text-sm font-(family-name:--font-family-text) text-(--color-text-default)">
+              {legend}
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 p-2">
+              {states.map((state) => (
+                <figure class="flex flex-col items-center gap-2">
+                  <figcaption class="text-xs font-(family-name:--font-family-text) text-(--color-text-secondary)">
+                    {state.legend}
+                  </figcaption>
+                  <Chip
+                    selected={selected}
+                    data-hover={state.key === "hover"}
+                    data-active={state.key === "pressed"}
+                    disabled={state.key === "disabled"}
+                    data-focus-visible={state.key === "focus"}
+                  >
+                    {withIcon && (
+                      <svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        aria-hidden="true"
+                      >
+                        <circle cx="8" cy="8" r="6" />
+                      </svg>
+                    )}
+                    Label
+                  </Chip>
+                </figure>
+              ))}
+            </div>
+          </>
+        ))}
+      </section>
+    ))}
+  </div>
+</Layout>
