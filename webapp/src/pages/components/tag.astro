@@ -3,7 +3,7 @@ import { Tag } from "../../components/system/tag";
 import { Title } from "../../components/system/typography";
 import Layout from "../../layouts/Layout.astro";
 
-const types = ["primary", "success", "warning", "error", "neutral", "blue", "shell"] as const;
+const sentiments = ["primary", "success", "warning", "error", "neutral", "blue", "shell"] as const;
 const contents = [
   { icon: "none", title: "Texte seul" },
   { icon: "left", title: "Pictogramme à gauche" },
@@ -20,12 +20,12 @@ const contents = [
           {title}
         </Title>
         <div class="flex flex-wrap justify-center gap-4 p-2">
-          {types.map((type) => (
+          {sentiments.map((sentiment) => (
             <figure class="flex flex-col items-center gap-2">
               <figcaption class="text-xs font-(family-name:--font-family-text) text-(--color-text-secondary)">
-                {type}
+                {sentiment}
               </figcaption>
-              <Tag type={type}>
+              <Tag sentiment={sentiment}>
                 {icon === "left" && (
                   <svg
                     viewBox="0 0 16 16"

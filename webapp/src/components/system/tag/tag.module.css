@@ -21,43 +21,43 @@
   color: var(--tag-local-icon-color);
 }
 
-.tag_type_primary {
+.tag_sentiment_primary {
   --tag-local-fill-color: var(--tag-primary-color-fill);
   --tag-local-text-color: var(--tag-primary-color-text);
   --tag-local-icon-color: var(--tag-primary-color-icon);
 }
 
-.tag_type_success {
+.tag_sentiment_success {
   --tag-local-fill-color: var(--tag-success-color-fill);
   --tag-local-text-color: var(--tag-success-color-text);
   --tag-local-icon-color: var(--tag-success-color-icon);
 }
 
-.tag_type_warning {
+.tag_sentiment_warning {
   --tag-local-fill-color: var(--tag-warning-color-fill);
   --tag-local-text-color: var(--tag-warning-color-text);
   --tag-local-icon-color: var(--tag-warning-color-icon);
 }
 
-.tag_type_error {
+.tag_sentiment_error {
   --tag-local-fill-color: var(--tag-error-color-fill);
   --tag-local-text-color: var(--tag-error-color-text);
   --tag-local-icon-color: var(--tag-error-color-icon);
 }
 
-.tag_type_neutral {
+.tag_sentiment_neutral {
   --tag-local-fill-color: var(--tag-neutral-color-fill);
   --tag-local-text-color: var(--tag-neutral-color-text);
   --tag-local-icon-color: var(--tag-neutral-color-icon);
 }
 
-.tag_type_blue {
+.tag_sentiment_blue {
   --tag-local-fill-color: var(--tag-blue-color-fill);
   --tag-local-text-color: var(--tag-blue-color-text);
   --tag-local-icon-color: var(--tag-blue-color-icon);
 }
 
-.tag_type_shell {
+.tag_sentiment_shell {
   --tag-local-fill-color: var(--tag-shell-color-fill);
   --tag-local-text-color: var(--tag-shell-color-text);
   --tag-local-icon-color: var(--tag-shell-color-icon);
