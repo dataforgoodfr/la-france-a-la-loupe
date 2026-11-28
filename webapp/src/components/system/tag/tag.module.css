@@ -1,0 +1,64 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tag-space-gap);
+  padding: var(--tag-space-padding-y) var(--tag-space-padding-x);
+  border-radius: var(--tag-shape-radius);
+  font-family: var(--tag-typography-font-family);
+  font-size: var(--tag-typography-font-size);
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--tag-local-text-color);
+  background-color: var(--tag-local-fill-color);
+}
+
+.tag > svg {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  color: var(--tag-local-icon-color);
+}
+
+.tag_type_primary {
+  --tag-local-fill-color: var(--tag-primary-color-fill);
+  --tag-local-text-color: var(--tag-primary-color-text);
+  --tag-local-icon-color: var(--tag-primary-color-icon);
+}
+
+.tag_type_success {
+  --tag-local-fill-color: var(--tag-success-color-fill);
+  --tag-local-text-color: var(--tag-success-color-text);
+  --tag-local-icon-color: var(--tag-success-color-icon);
+}
+
+.tag_type_warning {
+  --tag-local-fill-color: var(--tag-warning-color-fill);
+  --tag-local-text-color: var(--tag-warning-color-text);
+  --tag-local-icon-color: var(--tag-warning-color-icon);
+}
+
+.tag_type_error {
+  --tag-local-fill-color: var(--tag-error-color-fill);
+  --tag-local-text-color: var(--tag-error-color-text);
+  --tag-local-icon-color: var(--tag-error-color-icon);
+}
+
+.tag_type_neutral {
+  --tag-local-fill-color: var(--tag-neutral-color-fill);
+  --tag-local-text-color: var(--tag-neutral-color-text);
+  --tag-local-icon-color: var(--tag-neutral-color-icon);
+}
+
+.tag_type_blue {
+  --tag-local-fill-color: var(--tag-blue-color-fill);
+  --tag-local-text-color: var(--tag-blue-color-text);
+  --tag-local-icon-color: var(--tag-blue-color-icon);
+}
+
+.tag_type_shell {
+  --tag-local-fill-color: var(--tag-shell-color-fill);
+  --tag-local-text-color: var(--tag-shell-color-text);
+  --tag-local-icon-color: var(--tag-shell-color-icon);
+}
