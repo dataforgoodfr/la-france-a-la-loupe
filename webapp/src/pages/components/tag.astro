@@ -1,0 +1,59 @@
+---
+import { Tag } from "../../components/system/tag";
+import { Title } from "../../components/system/typography";
+import Layout from "../../layouts/Layout.astro";
+
+const sentiments = ["primary", "success", "warning", "error", "neutral", "blue", "shell"] as const;
+const contents = [
+  { icon: "none", title: "Texte seul" },
+  { icon: "left", title: "Pictogramme à gauche" },
+  { icon: "right", title: "Pictogramme à droite" },
+] as const;
+---
+
+<Layout>
+  <div>
+    <p>Page temporaire pour tester les variantes du Tag</p>
+    {contents.map(({ icon, title }) => (
+      <section class="p-4">
+        <Title level="h2" style={{ textAlign: "center" }}>
+          {title}
+        </Title>
+        <div class="flex flex-wrap justify-center gap-4 p-2">
+          {sentiments.map((sentiment) => (
+            <figure class="flex flex-col items-center gap-2">
+              <figcaption class="text-xs font-(family-name:--font-family-text) text-(--color-text-secondary)">
+                {sentiment}
+              </figcaption>
+              <Tag sentiment={sentiment}>
+                {icon === "left" && (
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6" />
+                  </svg>
+                )}
+                label
+                {icon === "right" && (
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                  >
+                    <circle cx="8" cy="8" r="6" />
+                  </svg>
+                )}
+              </Tag>
+            </figure>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>
